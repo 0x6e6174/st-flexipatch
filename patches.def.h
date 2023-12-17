@@ -126,7 +126,7 @@
 /* This patch adds the option of disabling bold fonts globally.
  * https://st.suckless.org/patches/disable_bold_italic_fonts/
  */
-#define DISABLE_BOLD_FONTS_PATCH 1
+#define DISABLE_BOLD_FONTS_PATCH 0
 
 /* This patch adds the option of disabling italic fonts globally.
  * https://st.suckless.org/patches/disable_bold_italic_fonts/
@@ -225,7 +225,7 @@
  * https://github.com/cog1to/st-ligatures
  * https://st.suckless.org/patches/ligatures/
  */
-#define LIGATURES_PATCH 1
+#define LIGATURES_PATCH 0
 
 /* This patch makes st ignore terminal color attributes by forcing display of the default
  * foreground and background colors only - making for a monochrome look. Idea ref.
@@ -532,7 +532,7 @@
 /* This patch adds the option of disabling bold fonts globally.
  * https://st.suckless.org/patches/disable_bold_italic_fonts/
  */
-#define DISABLE_BOLD_FONTS_PATCH 1
+#define DISABLE_BOLD_FONTS_PATCH 0
 
 /* This patch adds the option of disabling italic fonts globally.
  * https://st.suckless.org/patches/disable_bold_italic_fonts/
@@ -878,7 +878,7 @@
  * https://github.com/Dreomite/st/commit/e3b821dcb3511d60341dec35ee05a4a0abfef7f2
  * https://www.reddit.com/r/suckless/comments/jt90ai/update_support_for_proper_glyph_rendering_in_st/
  */
-#define WIDE_GLYPHS_PATCH 1
+#define WIDE_GLYPHS_PATCH 0
 
 /* There is a known issue that Google's Variable Fonts (VF) can end up with letter spacing
  * that is too wide in programs that use Xft, for example Inconsolata v3.000.
@@ -888,7 +888,7 @@
  *
  * https://github.com/googlefonts/Inconsolata/issues/42#issuecomment-737508890
  */
-#define WIDE_GLYPH_SPACING_PATCH 1
+#define WIDE_GLYPH_SPACING_PATCH 0 
 
 /* This patch allows user to specify the initial path st should use as the working directory.
  * https://st.suckless.org/patches/workingdir/
@@ -906,3 +906,6 @@
  * Depends on the XRESOURCES_PATCH.
  */
 #define XRESOURCES_RELOAD_PATCH 0
+
+
+
