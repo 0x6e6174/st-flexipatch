@@ -5,12 +5,11 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "CozetteVector Nerd Font:style=Regular:pixelsize=14:antialias=true:autohint=true";
+static char *font = "Maple Mono NF:pixelsize=16:antialias=true:autohint=true:features=ss01";
 #if FONT2_PATCH
 /* Spare fonts */
 static char *font2[] = {
-/*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
-/*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
+    //"Symbols Nerd Font:style=Regular:pixelsize=13:antialias=false:autohint=false"
 };
 #endif // FONT2_PATCH
 
@@ -29,7 +28,7 @@ static const int pseudotransparency = 0;
  *             0 = no border, 100 = border width is same as cell width */
 int borderperc = 20;
 #else
-static int borderpx = 2;
+static int borderpx = 10;
 #endif // RELATIVEBORDER_PATCH
 
 #if OPENURLONCLICK_PATCH
