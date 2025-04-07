@@ -1437,7 +1437,7 @@ xinit(int cols, int rows)
 	win.h = 2 * win.vborderpx + rows * win.ch;
 	#else
 	win.w = 2 * borderpx + cols * win.cw;
-	win.h = 2 * borderpx + rows * win.ch;
+	win.h = 2 * rows * win.ch;
 	#endif // ANYSIZE_PATCH
 	if (xw.gm & XNegative)
 		xw.l += DisplayWidth(xw.dpy, xw.scr) - win.w - 2;
@@ -1611,7 +1611,7 @@ xmakeglyphfontspecs(XftGlyphFontSpec *specs, const Glyph *glyphs, int len, int x
 	#if ANYSIZE_PATCH
 	float winx = win.hborderpx + x * win.cw, winy = win.vborderpx + y * win.ch, xp, yp;
 	#else
-	float winx = borderpx + x * win.cw, winy = borderpx + y * win.ch, xp, yp;
+	float winx = borderpx + x * win.cw, winy = y * win.ch, xp, yp;
 	#endif // ANYSIZE_PATCH
 	ushort mode, prevmode = USHRT_MAX;
 	Font *font = &dc.font;
@@ -1834,7 +1834,7 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
 	#if ANYSIZE_PATCH
 	int winx = win.hborderpx + x * win.cw, winy = win.vborderpx + y * win.ch;
 	#else
-	int winx = borderpx + x * win.cw, winy = borderpx + y * win.ch;
+	int winx = borderpx + x * win.cw, winy = y * win.ch;
 	#endif // ANYSIZE_PATCH
 	int width = charlen * win.cw;
 	Color *fg, *bg, *temp, revfg, revbg, truefg, truebg;
@@ -2557,7 +2557,7 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
 			#else
 			XftDrawRect(xw.draw, &drawcol,
 					borderpx + cx * win.cw,
-					borderpx + (cy + 1) * win.ch - \
+					(cy + 1) * win.ch - \
 						cursorthickness,
 					win.cw, cursorthickness);
 			#endif // ANYSIZE_PATCH
@@ -2575,7 +2575,7 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
 					win.vborderpx + cy * win.ch,
 					#else
 					borderpx + cx * win.cw,
-					borderpx + cy * win.ch,
+					cy * win.ch,
 					#endif // ANYSIZE_PATCH
 					cursorthickness, win.ch);
 			break;
@@ -2597,7 +2597,7 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
 				win.vborderpx + cy * win.ch,
 				#else
 				borderpx + cx * win.cw,
-				borderpx + cy * win.ch,
+				cy * win.ch,
 				#endif // ANYSIZE_PATCH
 				win.cw - 1, 1);
 		XftDrawRect(xw.draw, &drawcol,
@@ -2606,7 +2606,7 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
 				win.vborderpx + cy * win.ch,
 				#else
 				borderpx + cx * win.cw,
-				borderpx + cy * win.ch,
+				cy * win.ch,
 				#endif // ANYSIZE_PATCH
 				1, win.ch - 1);
 		XftDrawRect(xw.draw, &drawcol,
@@ -2615,7 +2615,7 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
 				win.vborderpx + cy * win.ch,
 				#else
 				borderpx + (cx + 1) * win.cw - 1,
-				borderpx + cy * win.ch,
+				cy * win.ch,
 				#endif // ANYSIZE_PATCH
 				1, win.ch - 1);
 		XftDrawRect(xw.draw, &drawcol,
@@ -2624,7 +2624,7 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
 				win.vborderpx + (cy + 1) * win.ch - 1,
 				#else
 				borderpx + cx * win.cw,
-				borderpx + (cy + 1) * win.ch - 1,
+				(cy + 1) * win.ch - 1,
 				#endif // ANYSIZE_PATCH
 				win.cw, 1);
 	}
@@ -2862,7 +2862,7 @@ xfinishdraw(void)
 		#if ANYSIZE_PATCH
 		XCopyArea(xw.dpy, (Drawable)im->pixmap, xw.buf, gc, 0, 0, im->width, im->height, win.hborderpx + im->x * win.cw, win.vborderpx + im->y * win.ch);
 		#else
-		XCopyArea(xw.dpy, (Drawable)im->pixmap, xw.buf, gc, 0, 0, im->width, im->height, borderpx + im->x * win.cw, borderpx + im->y * win.ch);
+		XCopyArea(xw.dpy, (Drawable)im->pixmap, xw.buf, gc, 0, 0, im->width, im->height, borderpx + im->x * win.cw, im->y * win.ch);
 		#endif // ANYSIZE_PATCH
 		XFreeGC(xw.dpy, gc);
 
@@ -2884,7 +2884,7 @@ xximspot(int x, int y)
 		return;
 
 	xw.ime.spot.x = borderpx + x * win.cw;
-	xw.ime.spot.y = borderpx + (y + 1) * win.ch;
+	xw.ime.spot.y = (y + 1) * win.ch;
 
 	XSetICValues(xw.ime.xic, XNPreeditAttributes, xw.ime.spotlist, NULL);
 }
